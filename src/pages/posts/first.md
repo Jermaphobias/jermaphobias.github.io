@@ -1,5 +1,5 @@
 ---
-title: 'Test'
+title: 'My First Blog Post'
 pubDate: 2022-07-01
 description: 'This is the first post of my new Astro blog.'
 author: 'Astro Learner'
@@ -10,6 +10,6 @@ tags: ["example-tag", "life", "art"]
 layout: ../../layouts/Layout.astro
 ---
 
-# TEST
+# My First Blog Post !!11!1!
 
-hi yamileth!
+Hi yamileth
