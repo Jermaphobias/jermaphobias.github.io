@@ -10,6 +10,6 @@ tags: ["example-tag", "life", "art"]
 layout: ../../layouts/Layout.astro
 ---
 
-# My First Blog Post !!11!1!
+# test!
 
 Hi yamileth
