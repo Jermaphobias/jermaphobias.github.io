@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astra's Corner :D</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--main-bg-color: #4169e1;
+		--main-secondary-color: #0000ff;
+		--main-text-color: #000;
+		--main-border-color: #c0c0c0;
+		--main-secondary-bg-color: #dcd6d6;
+		--window-gradient: linear-gradient(90deg, rgba(65, 105, 225, 0.8), rgba(65, 105, 225, 0.6));
+		--window-border-color: #c0c0c0;
+		--blue-rgb: 255 255 255;
+		--primary-rgb: var(--blue-rgb);
+	}
+
+	* {
+		box-sizing: border-box;
+		font-family: "MS PGothic", "Arial Narrow", Arial, sans-serif;
+	}
+
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		background-image: url("../assets/blue-background.png");
+		animation: moving-background 60s linear infinite;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.screen-overlay {
+		background: linear-gradient(
+			rgb(var(--primary-rgb) / 0.15),
+			rgb(var(--primary-rgb) / 0.15) 1px,
+			transparent 3px,
+			transparent 9px
+		);
+		background-size: 100% 9px;
+		height: 100vh;
+		width: 100%;
+		animation: pan-overlay 22s infinite linear;
+		position: absolute;
+		z-index: 10000;
+		left: 0px;
+		top: 0px;
+		pointer-events: none;
+	}
+
+	@keyframes pan-overlay {
+		from {
+			background-position: 0% 0%;
+		}
+		to {
+			background-position: 0% -100%;
+		}
+	}
+
+	@keyframes moving-background {
+		from {
+			background-position: 0 0;
+		}
+		to {
+			background-position: 100% -100%;
+		}
+	}
+
+	.desktop {
+		width: 100vw;
+		height: 100vh;
+		position: relative;
+	}
+
+	.header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		padding: 1rem;
+		text-align: center;
+		font-size: 2rem;
+		font-weight: bold;
+		background-image: url("../assets/header-background");
+		z-index: 1000;
+	}
+
+	.taskbar {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 40px;
+		background: var(--main-secondary-bg-color);
+		border-top: 2px outset var(--main-border-color);
+		display: flex;
+		align-items: center;
+		padding: 0 10px;
+		gap: 5px;
+		z-index: 1000;
+		user-select: none;
+	}
+
+	.taskbar-button {
+		background: var(--main-secondary-bg-color);
+		border: 2px outset var(--main-border-color);
+		padding: 4px 12px;
+		font-size: 12px;
+		cursor: pointer;
+		user-select: none;
+		height: 28px;
+	}
+
+	.taskbar-button:active {
+		border: 2px inset var(--main-secondary-bg-color);
+	}
+
+	.window {
+		position: absolute;
+		width: 300px;
+		height: 250px;
+		background: var(--main-bg-color);
+		border: 2px outset var(--main-border-color);
+		box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+		display: none;
+		z-index: 10;
+		transform: scale(0.8);
+		opacity: 0;
+		transition:
+			transform 0.15s ease-out,
+			opacity 0.15s ease-out;
+		resize: both;
+		overflow: auto;
+		min-width: 200px;
+		min-height: 150px;
+	}
+
+	.window.window-opening {
+		animation: windowOpen 0.15s ease-out forwards;
+	}
+
+	.window.window-closing {
+		animation: windowClose 0.15s ease-in forwards;
+	}
+
+	@keyframes windowOpen {
+		from {
+			transform: scale(0.8);
+			opacity: 0;
+		}
+		to {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+
+	@keyframes windowClose {
+		from {
+			transform: scale(1);
+			opacity: 1;
+		}
+		to {
+			transform: scale(0.8);
+			opacity: 0;
+		}
+	}
+
+	.window-header {
+		background: var(--window-gradient);
+		color: white;
+		padding: 0.2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid var(--main-border-color);
+		cursor: move;
+		height: 24px;
+	}
+
+	.window-title {
+		font-size: 0.9rem;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+		font-weight: bold;
+		user-select: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+	}
+
+	.window-controls {
+		display: flex;
+		gap: 2px;
+	}
+
+	.window-controls button {
+		width: 16px;
+		height: 14px;
+		background: var(--main-secondary-color);
+		border: 1px outset var(--main-border-color);
+		font-weight: bold;
+		cursor: pointer;
+		padding: 0;
+		line-height: 1;
+	}
+
+	.window-controls button:active {
+		border: 1px inset var(--main-secondary-bg-color);
+	}
+
+	.window-controls .close {
+		background: #ff1493;
+		color: white;
+	}
+
+	.window-content {
+		padding: 1rem;
+		background: var(--main-secondary-bg-color);
+		height: calc(100% - 24px);
+		overflow: auto;
+	}
+
+	.window-content button {
+		background: var(--main-secondary-bg-color);
+		border: 2px outset var(--main-border-color);
+		padding: 4px 12px;
+		font-size: 100%;
+		cursor: pointer;
+	}
+
+	.window-content button:active {
+		border: 2px inset var(--main-secondary-bg-color);
+	}
+
+	.window-content p {
+		margin: 0 0 8px 0;
+		color: #000;
+	}
+
+	.window-content h3 {
+		margin: 0 0 12px 0;
+		color: #000;
+		font-size: 1.1rem;
+	}
+
+	.window-content h4 {
+		margin: 0 0 4px 0;
+		color: #000;
+		font-size: 1rem;
+	}
+
+	.journal-entry {
+		margin-bottom: 16px;
+		padding: 8px;
+		border: 1px inset var(--main-border-color);
+		background: rgba(255, 255, 255, 0.3);
+	}
+
+	.journal-entry small {
+		color: #666;
+		font-style: italic;
+	}
+
+	.gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
+
+	.gallery-item {
+		text-align: center;
+		padding: 8px;
+		border: 1px inset var(--main-border-color);
+		background: rgba(255, 255, 255, 0.3);
+	}
+
+	.placeholder-image {
+		font-size: 2rem;
+		margin-bottom: 4px;
+		height: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(255, 255, 255, 0.5);
+		border: 1px solid var(--main-border-color);
+	}
+
+	.gallery-item p {
+		margin: 4px 0 0 0;
+		font-size: 0.8rem;
+	}
+
+	@media (max-width: 600px) {
+		.window {
+			max-width: 80vw;
+			max-height: 70vh;
+		}
+	}
+</style>

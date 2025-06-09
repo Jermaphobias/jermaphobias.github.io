@@ -1,0 +1,718 @@
+---
+const allPosts = Object.values(
+	import.meta.glob("../pages/posts/*.md", { eager: true })
+);
+const galleryItems = Object.values(
+	import.meta.glob("../pages/gallery/*.md", { eager: true })
+);
+---
+
+<div class="desktop">
+	<div class="icons">
+		<button class="icon" data-icon="welcome">
+			<img src="/computer-icon.png" alt="Welcome Icon" />
+			<span>Welcome</span>
+		</button>
+		<button class="icon" data-icon="journal">
+			<img src="/directory-explorer-icon.png" alt="Journal Icon" />
+			<span>Journal</span>
+		</button>
+		<button class="icon" data-icon="about">
+			<img src="/floppy-drive-icon.png" alt="About Icon" />
+			<span>About</span>
+		</button>
+		<button class="icon" data-icon="gallery">
+			<img src="/entire-network-globe-icon.png" alt="Gallery Icon" />
+			<span>Gallery</span>
+		</button>
+	</div>
+	<style lang="scss">
+		.icons {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 5vh;
+			padding: 1vh;
+		}
+
+		.icon {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: transparent;
+			cursor: pointer;
+			border: none;
+			transition:
+				transform 0.2s ease-in-out,
+				box-shadow 0.2s ease-in-out;
+		}
+		.icon:hover {
+			transform: scale(1.05);
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			img {
+				transition: transform 0.2s ease-in-out;
+				transform: scale(1.1) rotate(10deg);
+			}
+			transform: scale(1.1);
+			transition: transform 0.2s ease-in-out;
+		}
+		.icon span {
+			padding: 0.5rem;
+			background-image: linear-gradient(
+				to top,
+				rgba(255, 255, 255, 1),
+				rgba(255, 255, 255, 0.2)
+			);
+		}
+	</style>
+	<div class="taskbar">
+		<button class="taskbar-button"
+			>✨ <span id="clock">Loading time</span></button
+		>
+		<hr />
+		<div
+			class="taskbar-buttons"
+			style="
+				display: flex;
+				flex: 1;
+				min-width: 0;
+				overflow-x: auto;
+				overflow-y: hidden;
+				flex-wrap: nowrap;
+				align-items: center;
+				justify-content: flex-end;
+				white-space: nowrap;
+			"
+		></div>
+		<script>
+			function updateClock() {
+				const now = new Date();
+				const options = {
+					hour: "2-digit",
+					minute: "2-digit",
+					second: "2-digit",
+				};
+				document.getElementById("clock").textContent =
+					now.toLocaleTimeString([], options);
+			}
+			setInterval(updateClock, 1000);
+			updateClock();
+		</script>
+	</div>
+
+	<div
+		class="window"
+		id="welcome-window"
+		style="left: 50px; top: 50px; display: block; width: fit-content; height: 400px;"
+	>
+		<div class="window-header">
+			<div class="window-title">Welcome</div>
+			<div class="window-controls">
+				<button class="close" data-window="welcome">X</button>
+			</div>
+		</div>
+		<div class="window-content">
+			<h1>Welcome to My Personal Space!</h1>
+			<p>
+				Hi there! I'm Astra, and this is my little corner of the
+				internet. Here, I share my thoughts, projects, and creative
+				work.
+			</p>
+			<p>Feel free to explore my journal and gallery!</p>
+		</div>
+	</div>
+
+	<div
+		class="window"
+		id="navigation-window"
+		style="left: 100px; top: 100px; display: none;"
+	>
+		<div class="window-header">
+			<div class="window-title">Navigation</div>
+			<div class="window-controls">
+				<button class="close" data-window="navigation">X</button>
+			</div>
+		</div>
+		<div class="window-content">
+			<p>Menu items here</p>
+			<button>Home</button>
+		</div>
+	</div>
+
+	<div
+		class="window"
+		id="journal-window"
+		style="left: 200px; top: 120px; display: none; width: 400px; height: 350px;"
+	>
+		<div class="window-header">
+			<div class="window-title">Journal</div>
+			<div class="window-controls">
+				<button class="close" data-window="journal">X</button>
+			</div>
+		</div>
+		<div class="window-content">
+			<h3>My Journal Entries :3</h3>
+			<ul id="" "journal-list">
+				{
+					allPosts.map((post: any) => (
+						<li>
+							<a
+								href="#"
+								data-post-url={post.url}
+								data-post-title={post.frontmatter.title}
+								class="post-link"
+							>
+								{post.frontmatter.title}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+			<div id="journal-post-content" style="display: none;">
+				<button id="back-to-list">← Back to Journal List</button>
+				<div id="post-content"></div>
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="window"
+		id="about-window"
+		style="left: 150px; top: 180px; display: none; width: 350px; height: 300px;"
+	>
+		<div class="window-header">
+			<div class="window-title" draggable="false">About Me</div>
+			<div class="window-controls">
+				<button class="close" data-window="about">X</button>
+			</div>
+		</div>
+		<div class="window-content">
+			<h3>Hello! I'm Astra ✨</h3>
+			<p>
+				Welcome to my little corner of the internet! This is where I
+				share my thoughts, projects, and creative work.
+			</p>
+			<p><strong>Interests:</strong> Cooking (I guess? lol),</p>
+			<p>
+				Feel free to explore my journal and gallery to learn more about
+				what I'm up to!
+			</p>
+		</div>
+	</div>
+
+	<div
+		class="window"
+		id="gallery-window"
+		style="left: 400px; top: 100px; display: none; width: 450px; height: 400px;"
+	>
+		<div class="window-header">
+			<div class="window-title" draggable="false">Gallery</div>
+			<div class="window-controls">
+				<button class="close" data-window="gallery">X</button>
+			</div>
+		</div>
+		<div class="window-content">
+			<h3>My Creative Work</h3>
+			<div class="gallery-grid">
+				{
+					galleryItems.map((item: any) => (
+						<div class="gallery-item">
+							<a href={item.url}>
+								<img
+									src={
+										item.frontmatter.thumbnail ||
+										item.frontmatter.image
+									}
+									alt={item.frontmatter.title}
+								/>
+								<span>{item.frontmatter.title}</span>
+							</a>
+						</div>
+					))
+				}
+				<style>
+					.gallery-grid {
+						display: grid;
+						grid-template-columns: repeat(
+							auto-fill,
+							minmax(20vh, 20vh)
+						);
+						gap: 1vh;
+					}
+					.gallery-item {
+						background-color: #f0f0f0;
+						border-radius: 5px;
+						overflow: hidden;
+						text-align: center;
+						max-width: 20vh;
+						max-height: 20vh;
+						padding: 0;
+						position: relative;
+					}
+					.gallery-item img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+					}
+					.gallery-item span {
+						display: block;
+						background-color: rgba(0, 0, 0, 0.75);
+						color: white;
+						position: absolute;
+						bottom: 0;
+						left: 0;
+					}
+				</style>
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="window"
+		id="tools-window"
+		style="left: 500px; top: 200px; display: none;"
+	>
+		<div class="window-header">
+			<div class="window-title" draggable="false">Tools</div>
+			<div class="window-controls">
+				<button class="close" data-window="tools">X</button>
+			</div>
+		</div>
+		<div class="window-content">
+			<p>Quick tools</p>
+			<button>Settings</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	// Window management
+	const windows = document.querySelectorAll(".window");
+	const iconButtons = document.querySelectorAll(".icon");
+
+	// Icon button functionality - spawn window and taskbar button
+	iconButtons.forEach((button) => {
+		button.addEventListener("click", () => {
+			try {
+				const iconName = (button as HTMLElement).dataset.icon;
+				if (!iconName) return;
+
+				const windowId = `${iconName}-window`;
+				console.log(windowId);
+
+				const existingWindow = document.getElementById(windowId);
+				if (existingWindow) {
+					openWindow(iconName);
+					return;
+				}
+
+				const taskbarButton = document.createElement("button");
+				taskbarButton.className = "taskbar-button";
+				taskbarButton.dataset.window = iconName;
+				taskbarButton.textContent =
+					iconName.charAt(0).toUpperCase() + iconName.slice(1);
+
+				const taskbar = document.querySelector(".taskbar");
+				if (taskbar) {
+					taskbar.appendChild(taskbarButton);
+				}
+
+				// Create window
+				const window = document.createElement("div");
+				window.className = "window";
+				window.id = windowId;
+				window.style.cssText =
+					"left: 100px; top: 100px; display: block; width: 400px; height: 300px;";
+
+				window.innerHTML = `
+                <div class="window-header">
+                <div class="window-title">${iconName.charAt(0).toUpperCase() + iconName.slice(1)}</div>
+                <div class="window-controls">
+                    <button class="close" data-window="${iconName}">X</button>
+                </div>
+                </div>
+                <div class="window-content">
+                <p>Content for ${iconName}</p>
+                </div>
+            `;
+
+				// Add window to desktop
+				const desktop = document.querySelector(".desktop");
+				if (desktop) {
+					desktop.appendChild(window);
+				}
+
+				// Add click handler for new taskbar button
+				taskbarButton.addEventListener("click", () => {
+					const targetWindow = document.getElementById(windowId);
+					if (targetWindow) {
+						if (targetWindow.style.display === "block") {
+							closeWindow(iconName);
+						} else {
+							openWindow(iconName);
+						}
+					}
+				});
+
+				// Add close handler for new window
+				const closeButton = window.querySelector(".close");
+				if (closeButton) {
+					closeButton.addEventListener("click", () => {
+						closeWindow(iconName);
+						// Remove taskbar button when window is closed
+						taskbarButton.remove();
+						// Remove window element
+						setTimeout(() => {
+							window.remove();
+						}, 200);
+					});
+				}
+
+				// Make new window draggable
+				let isDragging = false;
+				let currentX = 0;
+				let currentY = 0;
+				let initialX = 0;
+				let initialY = 0;
+
+				const header = window.querySelector(".window-header");
+				if (header) {
+					(header as HTMLElement).addEventListener(
+						"mousedown",
+						(e: MouseEvent) => {
+							const target = e.target as Element;
+							if (target && target.classList.contains("close"))
+								return;
+
+							isDragging = true;
+							initialX = e.clientX - window.offsetLeft;
+							initialY = e.clientY - window.offsetTop;
+						}
+					);
+
+					document.addEventListener("mousemove", (e: MouseEvent) => {
+						if (isDragging) {
+							currentX = e.clientX - initialX;
+							currentY = e.clientY - initialY;
+							window.style.left = currentX + "px";
+							window.style.top = currentY + "px";
+						}
+					});
+
+					document.addEventListener("mouseup", () => {
+						isDragging = false;
+					});
+				}
+			} catch (error) {
+				console.error("Error creating window:", error);
+			}
+		});
+	});
+	const closeButtons = document.querySelectorAll(".close");
+
+	// Open window function
+	function openWindow(windowId: string) {
+		const windowElement = document.getElementById(windowId + "-window");
+		if (windowElement) {
+			windowElement.style.display = "block";
+			windowElement.classList.remove("window-closing");
+			windowElement.classList.add("window-opening");
+		}
+		openTaskbarButton(windowId);
+	}
+
+	openWindow("welcome");
+
+	// Close window function
+	function closeWindow(windowId: string) {
+		const windowElement = document.getElementById(windowId + "-window");
+		if (windowElement) {
+			windowElement.classList.remove("window-opening");
+			windowElement.classList.add("window-closing");
+			const taskbarBtn = document.querySelector(
+				`.taskbar-button[data-window="${windowId}"]`
+			);
+			if (taskbarBtn) taskbarBtn.remove();
+
+			// Hide the window after animation completes
+			setTimeout(() => {
+				windowElement.style.display = "none";
+				windowElement.classList.remove("window-closing");
+			}, 150);
+		}
+	}
+
+	function openTaskbarButton(windowId: string) {
+		const taskbarButton = document.querySelector(
+			`.taskbar-button[data-window="${windowId}"]`
+		);
+		if (!taskbarButton) {
+			const newButton = document.createElement("button");
+			newButton.className = "taskbar-button";
+			newButton.dataset.window = windowId;
+			newButton.textContent =
+				windowId.charAt(0).toUpperCase() + windowId.slice(1);
+			document.querySelector(".taskbar-buttons")?.appendChild(newButton);
+		}
+	}
+
+	function closeTaskbarButton(windowId: string) {
+		const taskbarButton = document.querySelector(
+			`.taskbar-button[data-window="${windowId}"]`
+		);
+		if (taskbarButton) {
+			taskbarButton.remove();
+		}
+	}
+
+	document.querySelector(".taskbar")?.addEventListener("click", (e) => {
+		const button = (e.target as HTMLElement).closest(".taskbar-button");
+		if (!button) return;
+
+		const windowId = button.dataset.window;
+		if (!windowId) return;
+
+		const windowEl = document.getElementById(`${windowId}-window`);
+		if (!windowEl) return;
+
+		if (windowEl.style.display === "block") {
+			closeWindow(windowId);
+		} else {
+			openWindow(windowId);
+		}
+	});
+
+	closeButtons.forEach((button) => {
+		button.addEventListener("click", () => {
+			const windowId = (button as HTMLElement).dataset.window;
+			if (windowId) {
+				closeWindow(windowId);
+			}
+		});
+	});
+
+	const postLinks = document.querySelectorAll(".post-link");
+	const journalList = document.getElementById("journal-list");
+	const postContent = document.getElementById("journal-post-content");
+	const backButton = document.getElementById("back-to-list");
+	const postContentDiv = document.getElementById("post-content");
+	const galleryLinks = document.querySelectorAll(".gallery-item a");
+	const galleryWindow = document.getElementById("gallery-window");
+
+	function setupGalleryGalleryLinks() {
+		const galleryContent = document.querySelector(
+			"#gallery-window .window-content"
+		);
+		const galleryGrid = galleryContent.querySelector(".gallery-grid");
+		// save the original grid markup so we can restore it later
+		const originalGridHTML = galleryGrid.outerHTML;
+
+		const galleryLinks = galleryGrid.querySelectorAll("a");
+		galleryLinks.forEach((link) => {
+			link.addEventListener("click", async (e) => {
+				e.preventDefault();
+				const url = link.getAttribute("href");
+				try {
+					// fetch the full item page
+					const res = await fetch(url);
+					const html = await res.text();
+					const doc = new DOMParser().parseFromString(
+						html,
+						"text/html"
+					);
+					// grab the main/article content (where your image & description live)
+					const content =
+						doc.querySelector("main") ||
+						doc.querySelector("article") ||
+						doc.body;
+
+					// replace the gallery grid with the detail view
+					galleryContent.innerHTML = `
+							<button id="gallery-back">← Back to Gallery</button>
+							${content.innerHTML}
+						`;
+
+					// wire up the back button to restore the grid
+					const back = document.getElementById("gallery-back");
+					back?.addEventListener("click", () => {
+						galleryContent.innerHTML = `<h3>My Creative Work</h3>${originalGridHTML}`;
+						setupGalleryGalleryLinks();
+					});
+				} catch (err) {
+					console.error("Error loading gallery item:", err);
+				}
+			});
+		});
+	}
+	// initial call
+	setupGalleryGalleryLinks();
+
+	postLinks.forEach((link) => {
+		link.addEventListener("click", async (e) => {
+			e.preventDefault();
+			const postUrl = (e.target as HTMLElement).dataset.postUrl;
+			const postTitle = (e.target as HTMLElement).dataset.postTitle;
+
+			try {
+				const response = await fetch(postUrl);
+				const html = await response.text();
+				const parser = new DOMParser();
+				const doc = parser.parseFromString(html, "text/html");
+				const content =
+					doc.querySelector("main") ||
+					doc.querySelector("article") ||
+					doc.body;
+
+				const journalWindow = document.querySelector(
+					"#journal-window .window-content"
+				);
+				if (journalWindow && content) {
+					journalWindow.innerHTML = `
+                    <button id="back-to-list">← Back to Journal List</button>
+                    <h2>${postTitle}</h2>
+                    ${content.innerHTML}
+                `;
+
+					// Re-attach back button event listener
+					const newBackButton =
+						document.getElementById("back-to-list");
+					if (newBackButton) {
+						newBackButton.addEventListener("click", () => {
+							if (journalWindow) {
+								journalWindow.innerHTML = `
+                        <h3>My Journal Entries :3</h3>
+                        <ul id="journal-list">
+                            ${Array.from(postLinks)
+								.map(
+									(link) =>
+										`<li><a href="#" data-post-url="${link.dataset.postUrl}" data-post-title="${link.dataset.postTitle}" class="post-link">${link.textContent}</a></li>`
+								)
+								.join("")}
+                        </ul>
+                        `;
+
+								// Re-attach post link event listeners
+								const newPostLinks =
+									journalWindow.querySelectorAll(
+										".post-link"
+									);
+								newPostLinks.forEach((newLink) => {
+									newLink.addEventListener("click", (e) => {
+										link.dispatchEvent(new Event("click"));
+									});
+								});
+							}
+						});
+					}
+				}
+			} catch (error) {
+				console.error("Error loading post:", error);
+				const journalWindow = document.querySelector(
+					"#journal-window .window-content"
+				);
+				if (journalWindow) {
+					journalWindow.innerHTML = `
+                    <button id="back-to-list">← Back to Journal List</button>
+                    <h2>${postTitle}</h2>
+                    <p>Sorry, could not load this post.</p>
+                `;
+
+					// Re-attach back button event listener for error case
+					const newBackButton =
+						document.getElementById("back-to-list");
+					if (newBackButton) {
+						newBackButton.addEventListener("click", () => {
+							if (journalWindow) {
+								journalWindow.innerHTML = `
+                        <h3>My Journal Entries :3</h3>
+                        <ul id="journal-list">
+                            ${Array.from(postLinks)
+								.map(
+									(link) =>
+										`<li><a href="#" data-post-url="${link.dataset.postUrl}" data-post-title="${link.dataset.postTitle}" class="post-link">${link.textContent}</a></li>`
+								)
+								.join("")}
+                        </ul>
+                        `;
+							}
+						});
+					}
+				}
+			}
+		});
+	});
+
+	if (backButton) {
+		backButton.addEventListener("click", () => {
+			if (journalList) journalList.style.display = "block";
+			if (postContent) postContent.style.display = "none";
+		});
+	}
+
+	// Make windows draggable
+	windows.forEach((windowElement) => {
+		const htmlWindowElement = windowElement as HTMLElement;
+		let isDragging = false;
+		let currentX = 0;
+		let currentY = 0;
+		let initialX = 0;
+		let initialY = 0;
+
+		const header = htmlWindowElement.querySelector(".window-header");
+		if (!header) return;
+
+		const startDrag = (clientX: number, clientY: number) => {
+			isDragging = true;
+			initialX = clientX - htmlWindowElement.offsetLeft;
+			initialY = clientY - htmlWindowElement.offsetTop;
+		};
+
+		const doDrag = (clientX: number, clientY: number) => {
+			if (!isDragging) return;
+
+			currentX = clientX - initialX;
+			currentY = clientY - initialY;
+
+			// Clamp within viewport
+			const maxX = window.innerWidth - htmlWindowElement.offsetWidth;
+			const maxY = window.innerHeight - htmlWindowElement.offsetHeight;
+			currentX = Math.max(0, Math.min(currentX, maxX));
+			currentY = Math.max(0, Math.min(currentY, maxY));
+
+			htmlWindowElement.style.left = currentX + "px";
+			htmlWindowElement.style.top = currentY + "px";
+		};
+
+		header.addEventListener("mousedown", (e: MouseEvent) => {
+			const target = e.target as Element;
+			if (target.classList.contains("close")) return;
+			startDrag(e.clientX, e.clientY);
+		});
+
+		document.addEventListener("mousemove", (e: MouseEvent) => {
+			doDrag(e.clientX, e.clientY);
+		});
+
+		document.addEventListener("mouseup", () => {
+			isDragging = false;
+		});
+
+		// touch support
+		header.addEventListener("touchstart", (e: TouchEvent) => {
+			const target = e.target as Element;
+			if (target.classList.contains("close")) return;
+			const touch = e.touches[0];
+			startDrag(touch.clientX, touch.clientY);
+			e.preventDefault();
+		});
+
+		document.addEventListener("touchmove", (e: TouchEvent) => {
+			const touch = e.touches[0];
+			doDrag(touch.clientX, touch.clientY);
+		}, { passive: false });
+
+		document.addEventListener("touchend", () => {
+			isDragging = false;
+		});
+	});
+</script>
