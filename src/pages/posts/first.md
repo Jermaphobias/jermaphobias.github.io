@@ -12,4 +12,4 @@ layout: ../../layouts/Layout.astro
 
 # test!
 
-Hi saemy
+Hi Saemy!
