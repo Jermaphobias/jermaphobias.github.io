@@ -1,6 +1,8 @@
 ---
 title: "My cat :333"
-image: "/catto.jpg"
+image:
+    url: 'https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/7fb1470b-b5b8-48c6-eac0-2277472c3900/public'
+    alt: 'Alt for the image.'
 thumbnail: "/catto.jpg"
 description: "mrrrreow :3"
 category: "photography"
