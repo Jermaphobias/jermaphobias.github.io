@@ -1,8 +1,6 @@
-# Astra's super mega awesome website made by Poyo! Welcome to use your website 101
+# Astra's website 101
 
-Hi there, Astra! Poyo here. I have built this precious website for ya, and now it's time for you to deploy it.
-
-To do so, you will need two things;
+You will need two things;
 - A GitHub.com account
 - A domain bought on either Porkbun or Cloudflare (I suggest these two, but any domain registrar will do)
 
