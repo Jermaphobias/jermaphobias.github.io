@@ -115,5 +115,3 @@ I took this photo of my catto, isn't he cute? :3
 
 ---
 That's it! You have successfully deployed your website to GitHub Pages. You should see your built website live on GitHub Pages!
-
-That's all, if I explained something wrong or you need help, DM me via Fiverr!
