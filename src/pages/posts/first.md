@@ -10,6 +10,6 @@ tags: ["example-tag", "life", "art"]
 layout: ../../layouts/Layout.astro
 ---
 
-# The First.
+# The First
 
 Welcome to filmbyjerm. This is a journal, a blog, a gallery, etc. Expect to see all my thoughts, ideas and projects as they're posted in real time. Otherwise, have fun exploring!
