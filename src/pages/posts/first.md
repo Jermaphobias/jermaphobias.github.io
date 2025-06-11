@@ -1,5 +1,5 @@
 ---
-title: 'My First Blog Post'
+title: '06-13-25'
 pubDate: 2022-07-01
 description: 'This is the first post of my new Astro blog.'
 author: 'Astro Learner'
@@ -10,10 +10,6 @@ tags: ["example-tag", "life", "art"]
 layout: ../../layouts/Layout.astro
 ---
 
-# test!
+# The First.
 
-Hi Saemy!
-
-![CT17](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/c4cc3251-9c3f-4c89-708c-b0672572ae00/public)
-
-More test.
+Welcome to filmbyjerm. This is a journal, a blog, a gallery, etc. Expect to see all my thoughts, ideas and projects as they're posted in real time. Otherwise, have fun exploring!
