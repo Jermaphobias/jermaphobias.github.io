@@ -4,7 +4,7 @@ image: "https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/4c2ec72e-a221-4e4a-27a0
 thumbnail: "https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/4c2ec72e-a221-4e4a-27a0-7fecc04dc800/public"
 description: "Puerto Rican Parade"
 category: "photography"
-date: "2025-06-12"
+date: "2025-06-14"
 tags: ["example-tag", "space", "intergalactic"]
 layout: ../../layouts/Layout.astro
 ---
