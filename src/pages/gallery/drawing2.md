@@ -1,6 +1,6 @@
 ---
 title: "STARGIRL"
-image: "https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/17caf944-43c7-4f72-1990-9db9ba5fab00/public)"
+image: "https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/17caf944-43c7-4f72-1990-9db9ba5fab00/public"
 thumbnail: "https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/17caf944-43c7-4f72-1990-9db9ba5fab00/public"
 description: "INTERGALATIC"
 category: "photography"
