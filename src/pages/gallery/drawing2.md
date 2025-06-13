@@ -61,8 +61,8 @@ layout: ../../layouts/Layout.astro
 
 ![SG25](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/f4698e30-81d9-4056-3a5f-95cfa27c5300/public)
 
-!SG[26](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/72c1c645-808d-4ee9-2525-232454b4b200/public)
+![SG26](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/72c1c645-808d-4ee9-2525-232454b4b200/public)
 
-!SG[27](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/3873dbdd-014e-429a-071d-5e45a74b1e00/public)
+![SG27](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/3873dbdd-014e-429a-071d-5e45a74b1e00/public)
 
-!SG[28](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/35e03d2e-efa9-458c-1082-96dd74b5c000/public)
+![SG28](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/35e03d2e-efa9-458c-1082-96dd74b5c000/public)
