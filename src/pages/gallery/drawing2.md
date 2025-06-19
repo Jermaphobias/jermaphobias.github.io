@@ -33,7 +33,7 @@ layout: ../../layouts/Layout.astro
 
 ![SG11](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/b9cc2229-1fd8-4ea6-7f9c-bdb9a3d9de00/public)
 
-![SG12](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/b9cc2229-1fd8-4ea6-7f9c-bdb9a3d9de00/public)
+![SG12](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/972813bf-d8b5-4ff7-cd57-415cb9caad00/public)
 
 ![SG13](https://imagedelivery.net/Lyt7VWbGfJKfUzXofL80ZQ/17caf944-43c7-4f72-1990-9db9ba5fab00/public)
 
